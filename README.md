@@ -21,7 +21,7 @@ It converts between English text and Morse code, supporting letters, numbers, an
 ---
 
 ## 📂 Project Structure
-MorseCode-Java/
+morse-code-java/
 │── src/
 │ ├── Main.java # Console version
 │ ├── Morse.java # Translator logic
@@ -31,8 +31,6 @@ MorseCode-Java/
 ├── .gitignore
 └── LICENSE
 
-yaml
-Copy code
 
 ---
 
@@ -40,5 +38,48 @@ Copy code
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/YOUR-USERNAME/MorseCode-Java.git
-cd MorseCode-Java/src
+git clone https://github.com/SpicyFalcon619/morse-code-java.git
+cd morse-code-java/src
+2. Compile
+bash
+Copy code
+javac Main.java Morse.java MorseCodeTranslatorGUI.java
+3. Run
+Console version:
+
+java Main
+GUI version:
+
+java MorseCodeTranslatorGUI
+💡 Example (Console)
+yaml
+Copy code
+Enter an English Text: HELLO WORLD
+Morse: .... . .-.. .-.. --- / .-- --- .-. .-.. -..
+
+Enter a Morse Code: .... . .-.. .-.. ---
+Word: HELLO
+🎨 Example (GUI)
+The GUI provides a simple interface:
+
+Enter text in the Input box
+
+Click Translate to Morse or Translate to English
+
+Results appear in the Output box
+
+Use Clear to reset fields
+
+
+![Morse Code GUI Screenshot](/Morse%20Code.png)
+🤝 Contribution
+Contributions are welcome! 🚀
+
+Fork this repo
+
+Create a feature branch
+
+Submit a pull request
+
+📜 License
+This project is licensed under the MIT License.
