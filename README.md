@@ -40,9 +40,9 @@ morse-code-java/
 ```bash
 git clone https://github.com/SpicyFalcon619/morse-code-java.git
 cd morse-code-java/src
+
 2. Compile
-bash
-Copy code
+```bash
 javac Main.java Morse.java MorseCodeTranslatorGUI.java
 3. Run
 Console version:
@@ -52,8 +52,7 @@ GUI version:
 
 java MorseCodeTranslatorGUI
 💡 Example (Console)
-yaml
-Copy code
+
 Enter an English Text: HELLO WORLD
 Morse: .... . .-.. .-.. --- / .-- --- .-. .-.. -..
 
