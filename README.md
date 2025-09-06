@@ -1,5 +1,7 @@
 # Morse Code Translator (Java)
 
+![Java](https://img.shields.io/badge/Java-17-blue)
+
 A simple **Morse Code Translator** built in Java with both **console** and **GUI** versions.
 It converts between English text and Morse code, supporting letters, numbers, and punctuation.
 
@@ -91,7 +93,7 @@ The GUI provides a simple interface:
 * Results appear in the **Output** box
 * Use **Clear** to reset fields
 
-![Morse Code GUI Screenshot](Morse%20Code.png)
+![Morse Code GUI Screenshot](docs/MorseCodeGUI.png)
 
 ---
 
