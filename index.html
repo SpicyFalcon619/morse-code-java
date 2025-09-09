@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morse Code Demo | SpicyFalcon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & Base ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== Heading ===== */
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 1s ease-in-out;
+      text-align: center;
+    }
+    p.subtitle {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-bottom: 35px;
+      text-align: center;
+    }
+
+    /* ===== Glass Card ===== */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      animation: fadeInUp 1s ease;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin: 15px 0;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      outline: none;
+      resize: none;
+      font-size: 16px;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.07);
+      color: #f8fafc;
+      transition: background 0.3s, transform 0.2s;
+    }
+    textarea:focus {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(1.01);
+    }
+
+    /* ===== Buttons ===== */
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    button {
+      background: linear-gradient(135deg, #38bdf8, #818cf8, #a855f7);
+      border: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 15px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    button:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 6px 18px rgba(129, 140, 248, 0.45);
+    }
+
+    /* ===== Output ===== */
+    .output {
+      margin-top: 25px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      min-height: 70px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #f1f5f9;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    .footer a {
+      color: #38bdf8;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer a:hover {
+      color: #a855f7;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Morse Code Translator</h1>
+  <p class="subtitle">Interactive demo of my Java project - now in the browser</p>
+
+  <div class="card">
+    <textarea id="inputText" placeholder="Enter text or Morse code..."></textarea>
+    <div class="buttons">
+      <button onclick="encodeMorse()">Encode → Morse</button>
+      <button onclick="decodeMorse()">Decode → Text</button>
+    </div>
+    <div class="output" id="output">Your result will appear here</div>
+  </div>
+
+  <div class="footer">
+    <p>🔗 <a href="https://github.com/SpicyFalcon619/morse-code-java" target="_blank">View source on GitHub</a></p>
+  </div>
+
+  <script>
+    const morseMap = {
+      'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..',
+      'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
+      'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+      'M': '--', 'N': '-.', 'O': '---', 'P': '.--.',
+      'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+      'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+      'Y': '-.--', 'Z': '--..',
+      '0': '-----', '1': '.----', '2': '..---', '3': '...--',
+      '4': '....-', '5': '.....', '6': '-....', '7': '--...',
+      '8': '---..', '9': '----.',
+      ' ': '/'
+    };
+
+    const reverseMorseMap = {};
+    for (let key in morseMap) reverseMorseMap[morseMap[key]] = key;
+
+    function encodeMorse() {
+      const text = document.getElementById("inputText").value.toUpperCase();
+      const morse = text.split("").map(ch => morseMap[ch] || "").join(" ");
+      document.getElementById("output").innerText = morse || "⚠️ Invalid input.";
+    }
+
+    function decodeMorse() {
+      const morse = document.getElementById("inputText").value.trim();
+      const text = morse.split(" ").map(code => reverseMorseMap[code] || "").join("");
+      document.getElementById("output").innerText = text || "⚠️ Invalid Morse code.";
+    }
+  </script>
+</body>
+</html>
